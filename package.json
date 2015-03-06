@@ -4,6 +4,7 @@
   "description": "A website challenging you daily with things to be solved by code",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,5 +22,8 @@
   "license": "GPL v2",
   "bugs": {
     "url": "https://github.com/Pukogames/daily-code-challenge/issues"
+  },
+  "dependencies": {
+    "express": "^4.12.2"
   }
 }
