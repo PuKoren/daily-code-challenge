@@ -1,0 +1,25 @@
+{
+  "name": "daily-code-challenge",
+  "version": "0.0.0",
+  "description": "A website challenging you daily with things to be solved by code",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Pukogames/daily-code-challenge.git"
+  },
+  "keywords": [
+    "daily",
+    "code",
+    "challenge",
+    "website",
+    "community"
+  ],
+  "author": "pukogames",
+  "license": "GPL v2",
+  "bugs": {
+    "url": "https://github.com/Pukogames/daily-code-challenge/issues"
+  }
+}
