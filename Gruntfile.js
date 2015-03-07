@@ -7,6 +7,41 @@ module.exports = function(grunt) {
         reporter: require('jshint-stylish')
       }
     },
+    less: {
+      dev: {
+        options: {
+          paths: ["assets/css"]
+        },
+        files: {
+          "assets/css/main.min.css": "public/css/*.less"
+        }
+      },
+      prod: {
+        options: {
+          paths: ["assets/css"],
+          plugins: [
+            new(require('less-plugin-autoprefix'))({
+              browsers: ["last 2 versions"]
+            }),
+            new(require('less-plugin-clean-css'))({})
+          ],
+          modifyVars: {}
+        },
+        files: {
+          "assets/css/main.min.css": "public/css/*.less"
+        }
+      }
+    },
+    cssmin: {
+      bundle: {
+        files: {
+          'assets/css/main.min.css': ['assets/css/main.min.css']
+        },
+        options: {
+          keepSpecialComments: 0
+        }
+      }
+    },
     nodemon: {
       dev: {
         script: 'index.js',
@@ -20,12 +55,18 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      files: ['index.js', 'src/**/*.js'],
-      tasks: ['jshint']
+      js: {
+        files: ['index.js', 'src/**/*.js'],
+        tasks: ['jshint']
+      },
+      less: {
+        files: ['public/css/**/*.less'],
+        tasks: ['less:dev']
+      }
     },
     concurrent: {
       dev: {
-        tasks: ['nodemon:dev', 'watch'],
+        tasks: ['nodemon:dev', 'watch:js', 'watch:less'],
         options: {
           logConcurrentOutput: true
         }
@@ -36,9 +77,12 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
-  grunt.registerTask('default', ['concurrent:dev']);
+  grunt.registerTask('default', ['jshint', 'less:dev', 'concurrent:dev']);
+  grunt.registerTask('publish', ['less:prod', 'cssmin:bundle']);
 };
