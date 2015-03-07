@@ -24,6 +24,7 @@
     "url": "https://github.com/Pukogames/daily-code-challenge/issues"
   },
   "dependencies": {
+    "compression": "^1.4.1",
     "express": "^4.12.2",
     "jade": "^1.9.2",
     "moniker": "^0.1.2"
