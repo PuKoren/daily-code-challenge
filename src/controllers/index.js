@@ -1,6 +1,5 @@
 module.exports = function(req, res) {
-	res.render('index', {
-		title: 'Hey',
-		message: 'Hello there!'
+	res.render('pages/index', {
+		title: 'Daily Code Challenge'
 	});
 };
