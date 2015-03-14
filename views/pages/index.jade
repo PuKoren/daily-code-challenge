@@ -1,3 +1,18 @@
 extends ../layout.jade
 
 block content
+  div(class='container')
+    section(class='header')
+      h2(class='title')!= challenge.title
+      a(class='button button-primary' href='#{challenge.repository}/fork' target='_blank') Take the challenge!
+    section(class='submissions')
+      h3(class='title') Latest submissions
+      table(class="u-full-width")
+        thead
+          tr
+            th User
+            th Repository
+            th Submission Date
+            th Score
+          tr
+        thead
