@@ -41,7 +41,15 @@ module.exports = function(grunt) {
           keepSpecialComments: 0
         }
       },
-      libs: {
+      'libs-dev': {
+        files: {
+          'assets/css/libs.min.css': ['bower_components/skeleton/css/normalize.css', 'bower_components/skeleton/css/skeleton.css']
+        },
+        options: {
+          sourceMap: true
+        }
+      },
+      'libs-prod': {
         files: {
           'assets/css/libs.min.css': ['bower_components/skeleton/css/normalize.css', 'bower_components/skeleton/css/skeleton.css']
         }
@@ -88,6 +96,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
-  grunt.registerTask('default', ['cssmin:libs', 'jshint', 'less:dev', 'concurrent:dev']);
-  grunt.registerTask('publish', ['cssmin:libs', 'less:prod', 'cssmin:bundle']);
+  grunt.registerTask('default', ['cssmin:libs-dev', 'jshint', 'less:dev', 'concurrent:dev']);
+  grunt.registerTask('publish', ['cssmin:libs-prod', 'less:prod', 'cssmin:bundle']);
 };
