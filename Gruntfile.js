@@ -40,6 +40,11 @@ module.exports = function(grunt) {
         options: {
           keepSpecialComments: 0
         }
+      },
+      libs: {
+        files: {
+          'assets/css/libs.min.css': ['bower_components/skeleton/css/normalize.css', 'bower_components/skeleton/css/skeleton.css']
+        }
       }
     },
     nodemon: {
@@ -83,6 +88,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'less:dev', 'concurrent:dev']);
+  grunt.registerTask('default', ['cssmin:libs', 'jshint', 'less:dev', 'concurrent:dev']);
   grunt.registerTask('publish', ['less:prod', 'cssmin:bundle']);
 };
