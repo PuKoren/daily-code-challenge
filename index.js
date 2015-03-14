@@ -6,12 +6,7 @@ var express = require('express'),
 app.set('views', './views');
 app.set('view engine', 'jade');
 
-app.get('/', function(req, res) {
-  res.render('index', {
-    title: 'Hey',
-    message: 'Hello there!'
-  });
-});
+app.get('/', require('./src/controllers/index.js'));
 
 app.use(compression());
 app.use(express.static(__dirname + '/assets'));
