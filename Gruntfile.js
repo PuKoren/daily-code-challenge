@@ -89,5 +89,5 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['cssmin:libs', 'jshint', 'less:dev', 'concurrent:dev']);
-  grunt.registerTask('publish', ['less:prod', 'cssmin:bundle']);
+  grunt.registerTask('publish', ['cssmin:libs', 'less:prod', 'cssmin:bundle']);
 };
