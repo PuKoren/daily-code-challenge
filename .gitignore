@@ -32,3 +32,6 @@ assets
 
 # bower install directory
 bower_components
+
+# config file to ignore (security matters)
+src/config.js
