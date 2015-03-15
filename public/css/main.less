@@ -1,9 +1,37 @@
+@import "colors";
+
 .header {
   text-align: center;
   margin-top: 18rem;
 
   a {
     margin: 0.5rem;
+  }
+}
+
+.container {
+  &.participation {
+    padding-top: 10rem;
+    text-align: center;
+    color: white;
+  }
+
+  .column {
+    padding-top: 20rem;
+    padding-bottom: 10rem;
+    cursor: pointer;
+
+    p {
+      min-height: 50px;
+    }
+
+    &.code {
+      background-color: @light-blue;
+    }
+
+    &.judge {
+      background-color: @nice-blue;
+    }
   }
 }
 
