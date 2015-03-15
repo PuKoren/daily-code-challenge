@@ -5,7 +5,7 @@ var uuid = require('node-uuid');
 module.exports = function(req, res) {
 	var loginUrl = '';
 	if (req.session.githubToken !== undefined) {
-		loginUrl = 'https://github.com/DailyCodeChallenge/challenge-1/fork';
+		loginUrl = '/join-the-fun';
 	} else {
 		var state = req.session.githubState || uuid.v4();
 		loginUrl += 'https://github.com/login/oauth/authorize?' + querystring.stringify({
