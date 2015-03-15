@@ -1,12 +1,15 @@
 var config = require('../config');
+var querystring = require('querystring');
 var uuid = require('node-uuid');
 
 module.exports = function(req, res) {
-	var loginUrl = 'https://github.com/login/oauth/authorize';
-	loginUrl += '?client_id=' + config['github-client-id'];
-	loginUrl += '&redirect_uri=' + config['github-redirect-uri'];
-	loginUrl += '&scope=' + config['github-scopes'].join(',');
-	loginUrl += '&state=' + uuid.v4();
+	var loginUrl = 'https://github.com/login/oauth/authorize?';
+	loginUrl += querystring.stringify({
+		'client_id': config['github-client-id'],
+		'redirect_uri': config['github-redirect-uri'],
+		'scope': config['github-scopes'].join(','),
+		'state': uuid.v4()
+	});
 
 	res.render('pages/index', {
 		title: 'Daily Code Challenge',

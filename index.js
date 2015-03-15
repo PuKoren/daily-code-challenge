@@ -2,11 +2,11 @@ var express = require('express'),
   compression = require('compression'),
   app = express();
 
-
 app.set('views', './views');
 app.set('view engine', 'jade');
 
 app.get('/', require('./src/controllers/index.js'));
+app.use('/login/oauth/callback', require('./src/middlewares/oauth-callback.js'));
 
 app.use(compression());
 app.use(express.static(__dirname + '/assets'));
