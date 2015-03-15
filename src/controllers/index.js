@@ -3,16 +3,19 @@ var querystring = require('querystring');
 var uuid = require('node-uuid');
 
 module.exports = function(req, res) {
-	var loginUrl = 'https://github.com/login/oauth/authorize?';
-	var state = req.session.githubState || uuid.v4();
-	loginUrl += querystring.stringify({
-		'client_id': config['github-client-id'],
-		'redirect_uri': config['github-redirect-uri'],
-		'scope': config['github-scopes'].join(','),
-		'state': state
-	});
-
-	req.session.githubState = state;
+	var loginUrl = '';
+	if (req.session.githubToken !== undefined) {
+		loginUrl = 'https://github.com/DailyCodeChallenge/challenge-1/fork';
+	} else {
+		var state = req.session.githubState || uuid.v4();
+		loginUrl += 'https://github.com/login/oauth/authorize?' + querystring.stringify({
+			'client_id': config['github-client-id'],
+			'redirect_uri': config['github-redirect-uri'],
+			'scope': config['github-scopes'].join(','),
+			'state': state
+		});
+		req.session.githubState = state;
+	}
 
 	res.render('pages/index', {
 		title: 'Daily Code Challenge',

@@ -29,24 +29,29 @@ module.exports = function(req, res, next) {
     var data = querystring.stringify(post_data);
     post_options.headers['Content-Length'] = data.length;
 
-    var post_req = https.request(post_options, function(res) {
-      res.setEncoding('utf8');
-      res.on('data', function(chunk) {
+    var post_req = https.request(post_options, function(response) {
+      response.setEncoding('utf8');
+      response.on('data', function(chunk) {
         try {
           chunk = JSON.parse(chunk);
           if (chunk.error === undefined) {
-            //store token
+            req.session.githubToken = chunk;
           }
-          console.log(chunk);
+          res.redirect('/');
         } catch (e) {
           console.log(e);
         }
+        next();
+      });
+      
+      response.on('error', function(chunk) {
+        next();
       });
     });
 
     post_req.write(data);
     post_req.end();
+  } else {
+    next();
   }
-
-  next();
 };
