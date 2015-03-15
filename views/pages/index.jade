@@ -4,6 +4,7 @@ block content
   div(class='container')
     section(class='header')
       h2(class='title')!= challenge.title
-      a(class='button button-primary' href='#{loginUrl}') Take the challenge!
+      p Compete against other coders or review submitted code and help contestants to climb the ladder
+      a(class='button button-primary' href='#{loginUrl}') Join the fun
       a(class='button' href='#') How it works
       include ../partials/submissions-latest.jade
