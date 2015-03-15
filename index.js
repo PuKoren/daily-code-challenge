@@ -2,6 +2,14 @@ var express = require('express'),
   compression = require('compression'),
   app = express();
 
+var session = require('express-session');
+var RedisStore = require('connect-redis')(session);
+
+app.use(session({
+    store: new RedisStore(require('./src/config').redisOptions),
+    secret: 'OJpONFAPNpnNFAPpoFA'
+}));
+
 app.set('views', './views');
 app.set('view engine', 'jade');
 

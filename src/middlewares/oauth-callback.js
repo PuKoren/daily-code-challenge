@@ -21,6 +21,10 @@ var post_options = {
 module.exports = function(req, res, next) {
   if (req.query.code !== undefined) {
     //check if req.query.state contains the generated uuid of the login link
+    if (req.session.githubState !== req.query.state) {
+      return next(new Error('Bad token, please try again'));
+    }
+    
     post_data.code = req.query.code;
     var data = querystring.stringify(post_data);
     post_options.headers['Content-Length'] = data.length;
