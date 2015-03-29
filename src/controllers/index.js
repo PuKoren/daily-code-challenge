@@ -4,7 +4,7 @@ var uuid = require('node-uuid');
 
 module.exports = function(req, res) {
 	var loginUrl = '';
-	if (req.session.githubToken !== undefined) {
+	if (req.session !== undefined && req.session.githubToken !== undefined) {
 		loginUrl = '/join-the-fun';
 	} else {
 		var state = req.session.githubState || uuid.v4();
