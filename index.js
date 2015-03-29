@@ -1,13 +1,12 @@
 var express = require('express'),
   compression = require('compression'),
-  app = express();
-
-var session = require('express-session');
-var RedisStore = require('connect-redis')(session);
+  app = express(),
+  session = require('express-session'),
+  RedisStore = require('connect-redis')(session);
 
 app.use(session({
-    store: new RedisStore(require('./src/config').redisOptions),
-    secret: 'OJpONFAPNpnNFAPpoFA'
+  store: new RedisStore(require('./src/config').redisOptions),
+  secret: 'OJpONFAPNpnNFAPpoFA'
 }));
 
 app.set('views', './views');
