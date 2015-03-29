@@ -1,12 +1,19 @@
 var express = require('express'),
   compression = require('compression'),
   app = express(),
+  config = require('./src/config'),
+  raven = require('raven'),
+  ravenClient = new raven.Client('https://' + config.sentryApiKey + '@app.getsentry.com/40699'),
   session = require('express-session'),
   RedisStore = require('connect-redis')(session);
 
+ravenClient.patchGlobal();
+
 app.use(session({
-  store: new RedisStore(require('./src/config').redisOptions),
-  secret: 'OJpONFAPNpnNFAPpoFA'
+  store: new RedisStore(config.redisOptions),
+  secret: 'OJpONFAPNpnNFAPpoFA',
+  resave: false,
+  saveUninitialized: true
 }));
 
 app.set('views', './views');
